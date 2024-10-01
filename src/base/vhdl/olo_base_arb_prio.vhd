@@ -31,9 +31,9 @@ entity olo_base_arb_prio is
         Width_g    : positive;
         Latency_g  : natural   := 1
     );
-    port (   
-        Clk        : in  std_logic;                             
-        Rst        : in  std_logic;                             
+    port (
+        Clk        : in  std_logic;
+        Rst        : in  std_logic;
         In_Req     : in  std_logic_vector(Width_g-1 downto 0);
         Out_Grant  : out std_logic_vector(Width_g-1 downto 0)
     );
@@ -52,7 +52,7 @@ architecture rtl of olo_base_arb_prio is
 
 begin
 
-    -- Only generate code for non-zero sized arbiters to avoid illegal range delcarations
+    -- Only generate code for non-zero sized arbitters to avoid illegal range declarations
     g_non_zero : if Width_g > 0 generate
 
         p_comb : process(In_Req)
