@@ -66,9 +66,13 @@ entity olo_axi_lite_slave is
         Rb_WrData        : out std_logic_vector(AxiDataWidth_g - 1 downto 0);
         Rb_Rd            : out std_logic;
         Rb_RdData        : in  std_logic_vector(AxiDataWidth_g - 1 downto 0);
-        Rb_RdValid       : in  std_logic
+        Rb_RdValid       : in  std_logic;
 
         -- Shit-Interface
+        S_AxiLite_AWId   : in   std_logic_vector(11 downto 0);
+        S_AxiLite_BId    : out  std_logic_vector(11 downto 0);
+        S_AxiLite_RId    : out  std_logic_vector(11 downto 0);
+        S_AxiLite_ArId   : in   std_logic_vector(11 downto 0)
     );
 end olo_axi_lite_slave;
 
@@ -100,7 +104,13 @@ architecture rtl of olo_axi_lite_slave is
     signal r, r_next : TwoProcess_r;
 
     constant UnusedBits_g : natural := log2(AxiDataWidth_g/8);
+
+
 begin
+
+	 -- Shit Interface
+    S_AxiLite_BId <= S_AxiLite_AWId;
+    S_AxiLite_RId <= S_AxiLite_ArId;
 
     -- *** Assertions ***
     assert AxiDataWidth_g mod 8 = 0 report "###ERROR###: olo_axi_lite_slave AxiDataWidth_g must be a multiple of 8" severity failure;
