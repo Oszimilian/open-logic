@@ -67,6 +67,8 @@ entity olo_axi_lite_slave is
         Rb_Rd            : out std_logic;
         Rb_RdData        : in  std_logic_vector(AxiDataWidth_g - 1 downto 0);
         Rb_RdValid       : in  std_logic
+
+        -- Shit-Interface
     );
 end olo_axi_lite_slave;
 
